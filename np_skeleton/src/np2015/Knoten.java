@@ -7,7 +7,9 @@ public class Knoten{
 	
 	private int x = 0;
 	private int y = 0;
+	private double akku = 0;
 	private double current_value = 0;
+	
 	
 	/**
 	 * @param x
@@ -20,6 +22,7 @@ public class Knoten{
 		this.x = x; // ----
 		this.y = y; // |
 		this.current_value = current_value;
+		this.akku = 0;
 		allNodes.add(this);
 		System.out.println(allNodes);
 	}
@@ -29,11 +32,10 @@ public class Knoten{
 	 * TODO: vielleicht in aller oberste klasse ziehen, dann spart man sich diese allNodes liste und kann vond dort aus mit hilfe der internen Knotenlisten von 
 	 * den spalten suchen
 	 * @param actual_node
-	 * @return Liste mit oberen und unteren Nachbaren
+	 * @return Knoten der über dem aktuellen liegt
 	 */
-	public  List<Knoten> get_neighbor_intern(List<Knoten> allNodes ){
+	public  Knoten get_neighbor_oben(List<Knoten> allNodes ){
 		
-		List<Knoten> neighbor = new ArrayList<Knoten>();
 		// stimmt das so oder ist das umgekehrt?!
 		int pos_neighbor_o = this.getY()-1;
 		int pos_neighbor_u = this.getY()+1;
@@ -41,54 +43,70 @@ public class Knoten{
 		int spalte = this.getX();
 		for (Knoten k : allNodes){
 			if (k.getX() == spalte && k.getY() == pos_neighbor_o){
-				neighbor.add(k);
+				return k;
 			}
 		}
-		if( neighbor.size() == 0){
-			neighbor.add(null);
+			return null;
 		}
 		
+	
+	/**
+	 *  
+	 * @param allNodes
+	 * @return Knoten der unter dem aktuellen Knoten liegt
+	 */
+	public  Knoten get_neighbor_unten(List<Knoten> allNodes ){
+		
+		// stimmt das so oder ist das umgekehrt?!
+		int pos_neighbor_o = this.getY()-1;
+		int pos_neighbor_u = this.getY()+1;
+		
+		int spalte = this.getX();
 		for (Knoten k : allNodes){
 			if (k.getX() == spalte && k.getY() == pos_neighbor_u){
-				neighbor.add(k);
+				return k;
 			}
 		}
-		if( neighbor.size() == 1){
-				neighbor.add(null);
+		return null;
 		}
-			
-		return neighbor;
-	}
-
+	
 	
 	/**
 	 * 
 	 * @param actual_node
-	 * @return Liste mit rechtem und linken Nachbaren
+	 * @return Knoten der rechts neben dem aktuellen liegt
 	 */
-	public List<Knoten> get_neighbor_extern(List<Knoten> allNodes ){
-		List<Knoten> neighbor_extern = new ArrayList<Knoten>();
+	public Knoten get_neighbor_rechts(List<Knoten> allNodes ){
+	
 		int zeile = this.getY();
 		int pos_neighbor_r = this.getX()+1;
 		int pos_neighbor_l = this.getX()-1;
 		
 		for ( Knoten k : allNodes ){
 			if (k.getY() == zeile && k.getX() == pos_neighbor_r ){
-				neighbor_extern.add(k);
+				return k;
 			}
 		}
-		if (neighbor_extern.size() == 0){
-			neighbor_extern.add(null);
+		return null;
 		}
+	
+	/**
+	 * 
+	 * @param allNodes
+	 * @return Knoten der links neben dem aktuellen liegt 
+	 */
+	public Knoten get_neighbor_links(List<Knoten> allNodes ){
+		
+		int zeile = this.getY();
+		int pos_neighbor_r = this.getX()+1;
+		int pos_neighbor_l = this.getX()-1;
+	
 		for ( Knoten k : allNodes){
 			if (k.getY() == zeile && k.getX() == pos_neighbor_l){
-				neighbor_extern.add(k);
+				return k;
 			}
 		}
-		if (neighbor_extern.size() == 1){
-				neighbor_extern.add(null);
-			}
-		return neighbor_extern;
+		return null;
 	}
 	
 	
@@ -120,6 +138,13 @@ public class Knoten{
 	public void setCurrent_value(double current_value) {
 		this.current_value = current_value;
 	}
+	public double getAkku() {
+		return akku;
+	}
+
+	public void setAkku(double d) {
+		this.akku = d;
+	}
 	
 	//TODO: == operator überschreiben
 	public boolean equals(Knoten other){
@@ -133,4 +158,7 @@ public class Knoten{
 		return( "( x: " + x + " y: " + y + " value: " + current_value + " )");
 		
 	}
+
+
+	
 }

@@ -12,6 +12,7 @@ public class Spalten{
 	//TODO: brauchen wir eine vierte arraylist? wenn ja warum ? kann man das nicht in der hauptstuktur verwalten  
 	
 	// TODO: wo muss ich diese allNOdes liste speichern?
+	//TODO: vielleicht besseren konstruktor ?? 
 	
 	private int spalte = 0;
 	

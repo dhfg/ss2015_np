@@ -52,10 +52,14 @@ public class NPOsmose {
 		System.out.println(links.toString());
 		System.out.println(rechts.toString());	
 		
-		List<Knoten> result = mitte.get_neighbor_intern(allNodes);
-		List<Knoten> result_ =  mitte.get_neighbor_extern(allNodes);
-		System.out.println("result " + result) ;
-		System.out.print("result_: " +result_);
+		Knoten result_oben = mitte.get_neighbor_oben(allNodes);
+		Knoten result_unten =  mitte.get_neighbor_unten(allNodes);
+		Knoten result_rechts = mitte.get_neighbor_rechts(allNodes);
+		Knoten result_links =  mitte.get_neighbor_links(allNodes);
+		System.out.println("oben " + result_oben) ;
+		System.out.println("unten: " +result_unten);
+		System.out.println("rechts " + result_rechts) ;
+		System.out.println("links: " +result_links);
 		
 		Spalten s = new Spalten(0);
 		System.out.print(s.toString());
@@ -65,6 +69,7 @@ public class NPOsmose {
 		s.set_akku_R(1.0);
 		System.out.print(s.toString());
 		
+		//TODO: Seq_Berechnung testen
 		/**
 		 * original ende der datei
 		 */
