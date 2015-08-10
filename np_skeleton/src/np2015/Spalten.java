@@ -2,7 +2,7 @@ package np2015;
 
 import java.util.ArrayList;
 
-
+// verwaltet alle Knoten einer Spalte
 public class Spalten{
 	
 	private int pos; 

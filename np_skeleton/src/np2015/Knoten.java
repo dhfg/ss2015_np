@@ -8,8 +8,6 @@ public class Knoten{
 	private int x = 0;
 	private int y = 0;
 	private double current_value = 0;
-	private List<Knoten>  allNodes = new ArrayList<Knoten>();
-	
 	
 	/**
 	 * @param x
