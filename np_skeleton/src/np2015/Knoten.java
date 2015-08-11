@@ -19,8 +19,8 @@ public class Knoten{
 	 * Konstruktor
 	 */
 	public Knoten(int x, int y, double current_value, List<Knoten> allNodes){
-		this.x = x; // ----
-		this.y = y; // |
+		this.x = x; // ---- weite
+		this.y = y; // | höhe
 		this.current_value = current_value;
 		this.akku = 0;
 		allNodes.add(this);
@@ -34,11 +34,11 @@ public class Knoten{
 	 * @param actual_node
 	 * @return Knoten der über dem aktuellen liegt
 	 */
-	public  Knoten get_neighbor_oben(List<Knoten> allNodes ){
+	public  Knoten get_neighbor_oben(List<Knoten> allNodes){
 		
 		// stimmt das so oder ist das umgekehrt?!
 		int pos_neighbor_o = this.getY()-1;
-		if (pos_neighbor_o < 0){
+		if (pos_neighbor_o < Matrix.width || pos_neighbor_o > Matrix.width){
 			return null;
 		}
 		
@@ -60,12 +60,16 @@ public class Knoten{
 	 * @param allNodes
 	 * @return Knoten der unter dem aktuellen Knoten liegt
 	 */
-	public  Knoten get_neighbor_unten(List<Knoten> allNodes ){
+	public  Knoten get_neighbor_unten(List<Knoten> allNodes){
 		
 		// stimmt das so oder ist das umgekehrt?!;
 		int pos_neighbor_u = this.getY()+1;
 		
 		int spalte = this.getX();
+		if (pos_neighbor_u < Matrix.width || pos_neighbor_u > Matrix.width){
+			return null;
+		}
+		
 		for (Knoten k : allNodes){
 			if (k.getX() == spalte && k.getY() == pos_neighbor_u){
 				return k;
@@ -81,10 +85,14 @@ public class Knoten{
 	 * @param actual_node
 	 * @return Knoten der rechts neben dem aktuellen liegt
 	 */
-	public Knoten get_neighbor_rechts(List<Knoten> allNodes ){
+	public Knoten get_neighbor_rechts(List<Knoten> allNodes){
 	
 		int zeile = this.getY();
 		int pos_neighbor_r = this.getX()+1;
+		
+		if (pos_neighbor_r < Matrix.height || pos_neighbor_r > Matrix.height){
+			return null;
+		}
 		
 		for ( Knoten k : allNodes ){
 			if (k.getY() == zeile && k.getX() == pos_neighbor_r ){
@@ -100,12 +108,14 @@ public class Knoten{
 	 * @param allNodes
 	 * @return Knoten der links neben dem aktuellen liegt 
 	 */
-	public Knoten get_neighbor_links(List<Knoten> allNodes ){
+	public Knoten get_neighbor_links(List<Knoten> allNodes){
 		
 		int zeile = this.getY();
 		int pos_neighbor_l = this.getX()-1;
-		if (pos_neighbor_l < 0){
+		if (pos_neighbor_l < Matrix.height || pos_neighbor_l > Matrix.height){
 			return null;
+			
+			
 		}
 	
 		for ( Knoten k : allNodes){
