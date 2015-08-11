@@ -38,7 +38,7 @@ public class Knoten{
 		
 		// stimmt das so oder ist das umgekehrt?!
 		int pos_neighbor_o = this.getY()-1;
-		if (pos_neighbor_o < Matrix.width || pos_neighbor_o > Matrix.width){
+		if (pos_neighbor_o < 0|| pos_neighbor_o > Matrix.height){
 			return null;
 		}
 		
@@ -66,7 +66,7 @@ public class Knoten{
 		int pos_neighbor_u = this.getY()+1;
 		
 		int spalte = this.getX();
-		if (pos_neighbor_u < Matrix.width || pos_neighbor_u > Matrix.width){
+		if (pos_neighbor_u < 0 || pos_neighbor_u > Matrix.height){
 			return null;
 		}
 		
@@ -90,7 +90,7 @@ public class Knoten{
 		int zeile = this.getY();
 		int pos_neighbor_r = this.getX()+1;
 		
-		if (pos_neighbor_r < Matrix.height || pos_neighbor_r > Matrix.height){
+		if (pos_neighbor_r < 0 || pos_neighbor_r > Matrix.width){
 			return null;
 		}
 		
@@ -112,9 +112,8 @@ public class Knoten{
 		
 		int zeile = this.getY();
 		int pos_neighbor_l = this.getX()-1;
-		if (pos_neighbor_l < Matrix.height || pos_neighbor_l > Matrix.height){
+		if (pos_neighbor_l < 0 || pos_neighbor_l > Matrix.width){
 			return null;
-			
 			
 		}
 	
