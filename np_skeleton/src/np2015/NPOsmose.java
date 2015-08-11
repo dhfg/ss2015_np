@@ -33,8 +33,7 @@ public class NPOsmose {
 			System.err.println("You must provide the serialized file as the first argument!");
 		}
 		GraphInfo ginfo = gson.fromJson(json, GraphInfo.class);
-		
-		
+		Matrix m = new Matrix(ginfo);
 		// Your implementation can now access ginfo to read out all important values
 		
 		/**
