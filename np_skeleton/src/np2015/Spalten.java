@@ -1,15 +1,17 @@
 package np2015;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 // verwaltet alle Knoten einer Spalte
-public class Spalten extends Thread{
+public class Spalten extends Thread {
+
 	
 	private int pos; 
 	private int iterationen;
 	private int spalte = 0;
-	
+	private GraphInfo ginfo = new GraphInfo(0, 0);
 	private ArrayList<Knoten> knoten = new ArrayList<Knoten>();
 	// für parallele lösung
 	private ArrayList<Double> akku_R = new ArrayList<Double>();
@@ -18,14 +20,88 @@ public class Spalten extends Thread{
 	
 	// TODO: wo muss ich diese allNOdes liste speichern?
 	//TODO: vielleicht besseren konstruktor ?? 
-	
 
-	
 	//Konstruktor
-	public Spalten(int spalte, int iter){
+	public Spalten(int spalte, int iter, GraphInfo ginfo){
 		this.spalte = spalte;
 		this.iterationen = iter;
+		this.ginfo = ginfo;
 	}
+	
+	// startet Berechnungen
+	public void run(){
+		//while(true) {
+		pBerechnung();
+		//}
+		
+	}
+
+	public synchronized void pBerechnung(){
+		//helpListe zum Zwischenspeichern der Nachbar Knoten
+		ArrayList<Knoten> helpListe = new ArrayList<Knoten>();
+		//iteriere über die Knoten in der Knotenliste und berechne die Rate zu NachbarKnotenOben und NachbarKnotenUnten
+		Iterator<Knoten> nodes = knoten.iterator();
+		while (nodes.hasNext()) {
+			Knoten actual = nodes.next();
+			Knoten neighbor_oben = actual.get_neighbor_oben(knoten);
+			Knoten neighbor_unten = actual.get_neighbor_unten(knoten);
+			
+			/**
+			 *  top
+			 */
+			double rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top);
+			
+			//wenn NachbarOben einen Wert empfangen soll, speichere ihn
+			if (neighbor_oben == null && rate > 0 ){
+					// erzeugt neuen Knoten mit inizialem current_vallue 0.0
+					//speichere in HelpListe!
+					neighbor_oben = actual.createNode(actual.getX(),actual.getY()-1, helpListe);
+			}
+			//wenn nachbarOben existiert, speichere die rate in den Akku von currentNode und NachbarOben 
+			if (neighbor_oben != null){
+				//System.out.println("übergangsrate nach oben: "+ actual.getCurrent_value()*
+					//	ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
+				neighbor_oben.setAkku(neighbor_oben.getAkku() + actual.getCurrent_value()*
+						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
+			
+				actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
+						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
+			}
+		
+			/**
+			 * bottom
+			 * */
+			rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom);
+
+			//wenn NachbarUnten einen Wert empfangen soll, speichere ihn
+			if (neighbor_unten == null && rate > 0 ){
+				// erzeugt neuen Knoten mit inizialem current_vallue 0.0
+				//speichere in HelpListe
+				neighbor_unten = actual.createNode(actual.getX(),actual.getY()+1, helpListe);
+			}
+			//wenn nachbarUnten existiert, speichere die rate in den Akku von currentNode und NachbarOben 
+			if (neighbor_unten != null){
+//				System.out.println("übergangsrate nach unten: "+ actual.getCurrent_value()*
+//						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom));
+				neighbor_unten.setAkku(neighbor_unten.getAkku() + actual.getCurrent_value()*
+						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom));
+				actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
+						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom));
+			}	
+			
+		}
+		//Iteriere über helpListe um die Knoten in knotenListe einzufügen
+		knoten.addAll(helpListe);
+		Iterator<Knoten> j = knoten.iterator();
+		while (j.hasNext()) {
+				Knoten actual = j.next();
+				actual.setCurrent_value(actual.getCurrent_value()+ actual.getAkku());
+				actual.setAkku(0.0);
+		}
+		System.out.println("nach berechnung "+knoten+ " spalte "+spalte);
+	}
+	
+
 	
 	// TODO: rausfinden ob set funktioniert auch wenn die liste leer ist 
 	
