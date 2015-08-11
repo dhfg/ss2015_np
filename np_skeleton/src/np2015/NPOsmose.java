@@ -38,6 +38,7 @@ public class NPOsmose {
 			System.err.println("You must provide the serialized file as the first argument!");
 		}
 		GraphInfo ginfo = gson.fromJson(json, GraphInfo.class);
+<<<<<<< HEAD
 		
 		Matrix m = new Matrix(ginfo);
 		Set<Entry<Integer, HashMap<Integer, Double>>> e = ginfo.column2row2initialValue.entrySet();
@@ -66,6 +67,11 @@ public class NPOsmose {
 		Spalten s = new Spalten(0, 10, ginfo);
 		Spalten s1 = new Spalten(1, 10, ginfo);
 		Spalten s2 = new Spalten(2, 10, ginfo);
+=======
+		Spalten s = new Spalten(0);
+		Spalten s1 = new Spalten(1);
+		Spalten s2 = new Spalten(2);
+>>>>>>> bd7a2734c44062f663536cca20b15623fa693e59
 
 		Knoten mitte = new Knoten(2,2,1.0, allNodes);
 		Knoten k1 = new Knoten(0,0,0.0, allNodes);
@@ -73,6 +79,7 @@ public class NPOsmose {
 		Knoten k3 = new Knoten(0,2,0.0, allNodes);
 		Knoten k4 = new Knoten(1,0,0.0, allNodes);
 		Knoten k5 = new Knoten(2,0,0.0, allNodes);
+<<<<<<< HEAD
 		s.set_knoten(k2);
 		s.set_knoten(k3);		
 		s.set_knoten(k1);
@@ -84,6 +91,19 @@ public class NPOsmose {
 //		m.addSpalte(s2);
 
 //		m.initializeMatrix();
+=======
+		s.setKnoten(k2);
+		s.setKnoten(k3);		
+		s.setKnoten(k1);
+		s1.setKnoten(k4);
+		s2.setKnoten(k5);
+		s2.setKnoten(mitte);
+		Matrix m = new Matrix(ginfo, 100); // initiale anzahl der iterationen hier gesetzt
+		m.addSpalte(s);
+		m.addSpalte(s1);
+		m.addSpalte(s2);
+		m.initializeMatrix();
+>>>>>>> bd7a2734c44062f663536cca20b15623fa693e59
 		// Your implementation can now access ginfo to read out all important values
 		
 		/**
@@ -115,7 +135,9 @@ public class NPOsmose {
 	//	System.out.println("rechts " + result_rechts) ;
 	//	System.out.println("links: " +result_links);
 		
+
 	//	Spalten s = new Spalten(0, 10);
+
 	//	System.out.print(s.toString());
 		
 	//	s.set_knoten(mitte);
@@ -124,6 +146,12 @@ public class NPOsmose {
 //		System.out.print(s.toString());
 //		Seq_Berechnung b = new Seq_Berechnung();
 		
+
+		
+		//TODO: nachvollziehen ob es auch wriklich das richtige tut!
+		//	b.seqBerechnung(allNodes, ginfo);
+		//	System.out.println("allNodes:  "+allNodes);
+
 //		b.seqBerechnung(allNodes, ginfo);	
 //		b.seqBerechnung(allNodes, ginfo);	
 
@@ -133,9 +161,7 @@ public class NPOsmose {
 		//b.seqBerechnung(allNodes, ginfo);
 		//System.out.println("allNodes:  "+allNodes);
 		
-		
-		
-		
+	
 		
 		
 		/**

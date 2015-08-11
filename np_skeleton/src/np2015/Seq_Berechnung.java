@@ -17,7 +17,6 @@ public class Seq_Berechnung{
 	 */
 	public void seqBerechnung(List<Knoten> allNodes, GraphInfo ginfo){
 		
-		//TODO: in schön!! das Objelt so kopieren das es keine refernez auf das alte erhält!!
 		List<Knoten> copyList = new ArrayList<Knoten>();
 		Iterator<Knoten> l = allNodes.iterator();
 		while (l.hasNext()) {

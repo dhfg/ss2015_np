@@ -15,6 +15,7 @@ public class Knoten{
 	private double akku = 0;
 	private double current_value = 0;
 	
+	// TODO: konstruktor anpassen?
 	
 	/**
 	 * @param x
@@ -34,14 +35,14 @@ public class Knoten{
 	
 	
 	/**
-	 * TODO: vielleicht in aller oberste klasse ziehen, dann spart man sich diese allNodes liste und kann vond dort aus mit hilfe der internen Knotenlisten von 
+	 * TODO: vielleicht in aller oberste klasse ziehen, dann spart man sich diese allNodes liste und kann vond dort 
+	 * aus mit hilfe der internen Knotenlisten von 
 	 * den spalten suchen
 	 * @param actual_node
 	 * @return Knoten der über dem aktuellen liegt
 	 */
 	public Knoten get_neighbor_oben(List<Knoten> allNodes){
 		
-		// stimmt das so oder ist das umgekehrt?!
 		int pos_neighbor_o = this.getY()-1;
 		
 		int spalte = this.getX();
@@ -52,7 +53,7 @@ public class Knoten{
 		}
 			return null;
 			
-		}
+	}
 		
 	
 	/**
@@ -62,7 +63,6 @@ public class Knoten{
 	 */
 	public  Knoten get_neighbor_unten(List<Knoten> allNodes){
 		
-		// stimmt das so oder ist das umgekehrt?!;
 		int pos_neighbor_u = this.getY()+1;
 		
 		int spalte = this.getX();
@@ -111,12 +111,7 @@ public class Knoten{
 		}
 		return null;
 	}
-	public Knoten createNode(int x, int y, List<Knoten> allNodes){
-		if ( x <= Matrix.height && x >= 0 && y <= Matrix.width && y >= 0){
-				return(new Knoten(x, y, 0.0, allNodes));
-			}
-		return null;
-		}
+
 		
 	
 	/**
