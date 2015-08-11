@@ -30,45 +30,78 @@ public class Spalten extends Thread {
 	
 	// startet Berechnungen
 	public void run(){
+		for (int i = 0; i < 10; i++) {
+			pBerechnung();
+		}
 		//while(true) {
-		pBerechnung();
-		//}
-		
+
+		//}		
+		System.out.println(knoten);
 	}
 
 	public synchronized void pBerechnung(){
 		//helpListe zum Zwischenspeichern der Nachbar Knoten
-		ArrayList<Knoten> helpListe = new ArrayList<Knoten>();
+		ArrayList<Knoten> helpListeTopBottom = new ArrayList<Knoten>();
+		ArrayList<Double> helpListLeft = new ArrayList<Double>();
+		ArrayList<Double> helpListRight = new ArrayList<Double>();
 		//iteriere über die Knoten in der Knotenliste und berechne die Rate zu NachbarKnotenOben und NachbarKnotenUnten
 		Iterator<Knoten> nodes = knoten.iterator();
+		int i = 0;
+		double rateL = 0.0;
+		double rateR = 0.0;
 		while (nodes.hasNext()) {
 			Knoten actual = nodes.next();
 			Knoten neighbor_oben = actual.get_neighbor_oben(knoten);
 			Knoten neighbor_unten = actual.get_neighbor_unten(knoten);
+			Knoten neighbor_links = actual.get_neighbor_links(knoten);
+			Knoten neighbor_rechts = actual.get_neighbor_rechts(knoten);
 			//neighbor Oben
-			calculateNeighborTopBottom(actual, neighbor_oben, helpListe, true);
+			calculateNeighborTopBottom(actual, neighbor_oben, helpListeTopBottom, true);
 			//neighbor unten
-			calculateNeighborTopBottom(actual, neighbor_unten, helpListe, false);
+			calculateNeighborTopBottom(actual, neighbor_unten, helpListeTopBottom, false);
+			//neighbor Links
+			rateL = calculateNeighborLeftRight(actual, helpListLeft, i, true);
+			//neighbor rechts
+			rateR = calculateNeighborLeftRight(actual, helpListRight, i, false);
+			i++;
 		}
-		//Iteriere über helpListe um die Knoten in knotenListe einzufügen
-		knoten.addAll(helpListe);
+		//Iteriere über helpListe um die Knoten von oben und unten in knotenListe einzufügen
+		knoten.addAll(helpListeTopBottom);
+		
 		Iterator<Knoten> j = knoten.iterator();
+		i = 0;
 		while (j.hasNext()) {
 				Knoten actual = j.next();
-				actual.setCurrent_value(actual.getCurrent_value()+ actual.getAkku());
+				actual.setCurrent_value(actual.getCurrent_value() + rateL + rateR + actual.getAkku());
 				actual.setAkku(0.0);
+				rateR = 0.0;
+				rateL = 0.0;
+				i++;		
 		}
-		System.out.println("nach berechnung "+knoten+ " spalte "+spalte);
 	}
 	
-	public void calculateNeighborLeftRight(Knoten acutal, Knoten neighbor, boolean left){
+	/**
+	 * calculate left and right
+	 * */
+	public double calculateNeighborLeftRight(Knoten actual, ArrayList<Double> helpList, int pos, boolean left){
 		
+		double rate = 0.0;
+		Neighbor neighNeigh = Neighbor.Right;
+		if (left){
+			neighNeigh = Neighbor.Left;
+			rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh);
+			helpList.add(pos, rate);
+			}else{
+			rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh);
+			helpList.add(pos, rate);
+		}
+		return rate;
 	}
 	
 	public void calculateNeighborTopBottom(Knoten actual, Knoten neighbor, ArrayList<Knoten> helpListe, boolean top){
-		Neighbor neighbour = Neighbor.Bottom;
-		if (top){neighbour = Neighbor.Top;}
-		double rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighbour);
+		Neighbor neighNeigh  = Neighbor.Bottom;
+		if (top){neighNeigh  = Neighbor.Top;}
+		double rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh );
 		//wenn NachbarOben einen Wert empfangen soll, speichere ihn
 		if (neighbor == null && rate > 0 ){
 				// erzeugt neuen Knoten mit inizialem current_vallue 0.0
@@ -80,10 +113,10 @@ public class Spalten extends Thread {
 			//System.out.println("übergangsrate nach oben: "+ actual.getCurrent_value()*
 				//	ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
 			neighbor.setAkku(neighbor.getAkku() + actual.getCurrent_value()*
-					ginfo.getRateForTarget(actual.getX(), actual.getY(), neighbour));
+					ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh ));
 		
 			actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
-					ginfo.getRateForTarget(actual.getX(), actual.getY(), neighbour));
+					ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh ));
 		}
 	}
 	

@@ -33,7 +33,29 @@ public class NPOsmose {
 			System.err.println("You must provide the serialized file as the first argument!");
 		}
 		GraphInfo ginfo = gson.fromJson(json, GraphInfo.class);
+		Spalten s = new Spalten(0, 10, ginfo);
+		Spalten s1 = new Spalten(1, 10, ginfo);
+		Spalten s2 = new Spalten(2, 10, ginfo);
+
+		Knoten mitte = new Knoten(2,2,1.0, allNodes);
+		Knoten k1 = new Knoten(0,0,0.0, allNodes);
+		Knoten k2 = new Knoten(0,1,0.0, allNodes);
+		Knoten k3 = new Knoten(0,2,0.0, allNodes);
+		Knoten k4 = new Knoten(1,0,0.0, allNodes);
+		Knoten k5 = new Knoten(2,0,0.0, allNodes);
+		s.set_knoten(k2);
+		s.set_knoten(k3);		
+		s.set_knoten(k1);
+		s1.set_knoten(k4);
+		s2.set_knoten(k5);
+		s2.set_knoten(mitte);
+		s.set_akku_L(0.0);
+		s.set_akku_R(0.0);
 		Matrix m = new Matrix(ginfo);
+		m.addSpalte(s);
+		m.addSpalte(s1);
+		m.addSpalte(s2);
+		m.initializeMatrix();
 		// Your implementation can now access ginfo to read out all important values
 		
 		/**
@@ -42,7 +64,7 @@ public class NPOsmose {
 		
 		// muss auskommentiert sein für test der seq_berechnung!
 		
-		Knoten mitte = new Knoten(1,1,1.0, allNodes);
+	//	Knoten mitte = new Knoten(1,1,1.0, allNodes);
 	//	Knoten oben = new Knoten(1,0,0.0, allNodes);
 	//	Knoten unten = new Knoten(1,2,0.0, allNodes);
 	//	Knoten links = new Knoten(0,1,0.0, allNodes);
@@ -65,20 +87,22 @@ public class NPOsmose {
 	//	System.out.println("rechts " + result_rechts) ;
 	//	System.out.println("links: " +result_links);
 		
-		Spalten s = new Spalten(0);
+	//	Spalten s = new Spalten(0, 10);
 	//	System.out.print(s.toString());
 		
-		s.set_knoten(mitte);
-		s.set_akku_L(1.0);
-		s.set_akku_R(1.0);
+	//	s.set_knoten(mitte);
+//		s.set_akku_L(1.0);
+//		s.set_akku_R(1.0);
 //		System.out.print(s.toString());
-		Seq_Berechnung b = new Seq_Berechnung();
+//		Seq_Berechnung b = new Seq_Berechnung();
 		
-		b.seqBerechnung(allNodes, ginfo);
+//		b.seqBerechnung(allNodes, ginfo);	
+//		b.seqBerechnung(allNodes, ginfo);	
+
 //		System.out.println("allNodes:  "+allNodes);
-		
+
 		//TODO: nachvollziehen ob es auch wriklich das richtige tut!
-		//	b.seqBerechnung(allNodes, ginfo);
+		//b.seqBerechnung(allNodes, ginfo);
 		//System.out.println("allNodes:  "+allNodes);
 		
 		
