@@ -45,50 +45,10 @@ public class Spalten extends Thread {
 			Knoten actual = nodes.next();
 			Knoten neighbor_oben = actual.get_neighbor_oben(knoten);
 			Knoten neighbor_unten = actual.get_neighbor_unten(knoten);
-			
-			/**
-			 *  top
-			 */
-			double rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top);
-			
-			//wenn NachbarOben einen Wert empfangen soll, speichere ihn
-			if (neighbor_oben == null && rate > 0 ){
-					// erzeugt neuen Knoten mit inizialem current_vallue 0.0
-					//speichere in HelpListe!
-					neighbor_oben = actual.createNode(actual.getX(),actual.getY()-1, helpListe);
-			}
-			//wenn nachbarOben existiert, speichere die rate in den Akku von currentNode und NachbarOben 
-			if (neighbor_oben != null){
-				//System.out.println("übergangsrate nach oben: "+ actual.getCurrent_value()*
-					//	ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
-				neighbor_oben.setAkku(neighbor_oben.getAkku() + actual.getCurrent_value()*
-						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
-			
-				actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
-						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
-			}
-		
-			/**
-			 * bottom
-			 * */
-			rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom);
-
-			//wenn NachbarUnten einen Wert empfangen soll, speichere ihn
-			if (neighbor_unten == null && rate > 0 ){
-				// erzeugt neuen Knoten mit inizialem current_vallue 0.0
-				//speichere in HelpListe
-				neighbor_unten = actual.createNode(actual.getX(),actual.getY()+1, helpListe);
-			}
-			//wenn nachbarUnten existiert, speichere die rate in den Akku von currentNode und NachbarOben 
-			if (neighbor_unten != null){
-//				System.out.println("übergangsrate nach unten: "+ actual.getCurrent_value()*
-//						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom));
-				neighbor_unten.setAkku(neighbor_unten.getAkku() + actual.getCurrent_value()*
-						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom));
-				actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
-						ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom));
-			}	
-			
+			//neighbor Oben
+			calculateNeighborTopBottom(actual, neighbor_oben, helpListe, true);
+			//neighbor unten
+			calculateNeighborTopBottom(actual, neighbor_unten, helpListe, false);
 		}
 		//Iteriere über helpListe um die Knoten in knotenListe einzufügen
 		knoten.addAll(helpListe);
@@ -101,10 +61,34 @@ public class Spalten extends Thread {
 		System.out.println("nach berechnung "+knoten+ " spalte "+spalte);
 	}
 	
-
+	public void calculateNeighborLeftRight(Knoten acutal, Knoten neighbor, boolean left){
+		
+	}
+	
+	public void calculateNeighborTopBottom(Knoten actual, Knoten neighbor, ArrayList<Knoten> helpListe, boolean top){
+		Neighbor neighbour = Neighbor.Bottom;
+		if (top){neighbour = Neighbor.Top;}
+		double rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighbour);
+		//wenn NachbarOben einen Wert empfangen soll, speichere ihn
+		if (neighbor == null && rate > 0 ){
+				// erzeugt neuen Knoten mit inizialem current_vallue 0.0
+				//speichere in HelpListe!
+				neighbor = actual.createNode(actual.getX(),actual.getY()-1, helpListe);
+		}
+		//wenn nachbarOben existiert, speichere die rate in den Akku von currentNode und NachbarOben 
+		if (neighbor != null){
+			//System.out.println("übergangsrate nach oben: "+ actual.getCurrent_value()*
+				//	ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
+			neighbor.setAkku(neighbor.getAkku() + actual.getCurrent_value()*
+					ginfo.getRateForTarget(actual.getX(), actual.getY(), neighbour));
+		
+			actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
+					ginfo.getRateForTarget(actual.getX(), actual.getY(), neighbour));
+		}
+	}
+	
 	
 	// TODO: rausfinden ob set funktioniert auch wenn die liste leer ist 
-	
 	
 	public void set_knoten(Knoten k){
 		knoten.add(k);	
