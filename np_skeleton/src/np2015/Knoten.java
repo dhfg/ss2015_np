@@ -41,9 +41,6 @@ public class Knoten{
 		
 		// stimmt das so oder ist das umgekehrt?!
 		int pos_neighbor_o = this.getY()-1;
-		if (pos_neighbor_o < 0|| pos_neighbor_o > Matrix.height){
-			return null;
-		}
 		
 		int spalte = this.getX();
 		for (Knoten k : allNodes){
@@ -51,9 +48,7 @@ public class Knoten{
 				return k;
 			}
 		}
-		// es gibt den nachbarknoten noch nicht, deswegen wird er mit dem current_value null angelegt
-			Knoten new_node =new  Knoten(spalte, pos_neighbor_o, 0.0, allNodes);
-			return new_node;
+			return null;
 			
 		}
 		
@@ -69,17 +64,13 @@ public class Knoten{
 		int pos_neighbor_u = this.getY()+1;
 		
 		int spalte = this.getX();
-		if (pos_neighbor_u < 0 || pos_neighbor_u > Matrix.height){
-			return null;
-		}
 		
 		for (Knoten k : allNodes){
 			if (k.getX() == spalte && k.getY() == pos_neighbor_u){
 				return k;
 			}
 		}
-		Knoten new_node =new  Knoten(spalte, pos_neighbor_u, 0.0, allNodes);
-		return new_node;
+		return null;
 		}
 	
 	
@@ -93,17 +84,12 @@ public class Knoten{
 		int zeile = this.getY();
 		int pos_neighbor_r = this.getX()+1;
 		
-		if (pos_neighbor_r < 0 || pos_neighbor_r > Matrix.width){
-			return null;
-		}
-		
 		for ( Knoten k : allNodes ){
 			if (k.getY() == zeile && k.getX() == pos_neighbor_r ){
 				return k;
 			}
 		}
-		Knoten new_node =new  Knoten(pos_neighbor_r,zeile, 0.0, allNodes);
-		return new_node;
+		return null;
 		}
 	
 	/**
@@ -115,20 +101,21 @@ public class Knoten{
 		
 		int zeile = this.getY();
 		int pos_neighbor_l = this.getX()-1;
-		if (pos_neighbor_l < 0 || pos_neighbor_l > Matrix.width){
-			return null;
-			
-		}
 	
 		for ( Knoten k : allNodes){
 			if (k.getY() == zeile && k.getX() == pos_neighbor_l){
 				return k;
 			}
 		}
-		Knoten new_node =new  Knoten(pos_neighbor_l,zeile, 0.0, allNodes);
-		return new_node;
+		return null;
 	}
-	
+	public Knoten createNode(int x, int y, List<Knoten> allNodes){
+		if ( x <= Matrix.height && x >= 0 && y <= Matrix.width && y >= 0){
+				return(new Knoten(x, y, 0.0, allNodes));
+			}
+		return null;
+		}
+		
 	
 	/**
 	 * getter und setter für alle Felder von Knoten
