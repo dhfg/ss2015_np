@@ -96,7 +96,12 @@ public class Matrix extends Thread{
 	
 		//TODO akku vom link und rechts ändern	
 	
-	
+	static Runnable runSpalten = new Runnable(){
+		public void run(){
+			System.out.println("noch passiert hier gar nichts");
+			//TODO: passende methode hier aufrufen!!
+		}	
+	};
 	
 	// wo ist die run-funktion?
 	public void startSpalten(){
