@@ -49,8 +49,6 @@ public class NPOsmose {
 		s1.set_knoten(k4);
 		s2.set_knoten(k5);
 		s2.set_knoten(mitte);
-		s.set_akku_L(0.0);
-		s.set_akku_R(0.0);
 		Matrix m = new Matrix(ginfo);
 		m.addSpalte(s);
 		m.addSpalte(s1);
