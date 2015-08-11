@@ -65,7 +65,7 @@ public class NPOsmose {
 	//	System.out.println("rechts " + result_rechts) ;
 	//	System.out.println("links: " +result_links);
 		
-		Spalten s = new Spalten(0);
+		Spalten s = new Spalten(0, 100);
 	//	System.out.print(s.toString());
 		
 		s.set_knoten(mitte);
@@ -75,15 +75,11 @@ public class NPOsmose {
 		Seq_Berechnung b = new Seq_Berechnung();
 		
 		b.seqBerechnung(allNodes, ginfo);
-//		System.out.println("allNodes:  "+allNodes);
+		System.out.println("allNodes:  "+allNodes);
 		
 		//TODO: nachvollziehen ob es auch wriklich das richtige tut!
-		//	b.seqBerechnung(allNodes, ginfo);
-		//System.out.println("allNodes:  "+allNodes);
-		
-		
-		
-		
+			b.seqBerechnung(allNodes, ginfo);
+			System.out.println("allNodes:  "+allNodes);
 		
 		
 		/**
