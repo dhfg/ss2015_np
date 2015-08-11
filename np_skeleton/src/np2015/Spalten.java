@@ -1,6 +1,7 @@
 package np2015;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // verwaltet alle Knoten einer Spalte
 public class Spalten extends Thread{
