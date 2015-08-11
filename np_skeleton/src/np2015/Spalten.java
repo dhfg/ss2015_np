@@ -94,21 +94,13 @@ public class Spalten extends Thread {
 		if (left){
 			neighNeigh = Neighbor.Left;
 			//rate für nachbar Links
-<<<<<<< HEAD
-			rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh);
-			if (rate >0 )System.out.println("rateL "+ rate + " knoten " + actual);
-		}else{
-			//rate für nachbar rechts
-			rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh);
-			if (rate >0 )System.out.println("rateR "+ rate + " knoten " + actual);
-=======
+
 			rate = actual.getCurrent_value()*Matrix.ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh);
 			System.out.println("rateL "+ rate);
 		}else{
 			//rate für nachbar rechts
 			rate = actual.getCurrent_value()*Matrix.ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh);
 			System.out.println("rateR "+ rate);
->>>>>>> bd7a2734c44062f663536cca20b15623fa693e59
 		}
 		return rate;
 	}

@@ -38,9 +38,8 @@ public class NPOsmose {
 			System.err.println("You must provide the serialized file as the first argument!");
 		}
 		GraphInfo ginfo = gson.fromJson(json, GraphInfo.class);
-<<<<<<< HEAD
 		
-		Matrix m = new Matrix(ginfo);
+		Matrix m = new Matrix(ginfo, 0);
 		Set<Entry<Integer, HashMap<Integer, Double>>> e = ginfo.column2row2initialValue.entrySet();
 		Iterator<Entry<Integer, HashMap<Integer, Double>>> it1 = e.iterator();
 			Entry<Integer, HashMap<Integer, Double>> entry = it1.next();
@@ -57,21 +56,16 @@ public class NPOsmose {
 			System.out.println("x "+ x + " y "+ y + " double "+ d);
 			
 //		ginfo.addInitialEntry(x, y, d);
-		Spalten initial = new Spalten(x, 100, ginfo);
+/*		Spalten initial = new Spalten(x);
 		Knoten k = new Knoten(x, y, d, allNodes);
 		allNodes.add(k);
-		initial.set_knoten(k);
+		initial.setKnoten(k);
 		m.initializeMatrix(initial);
 		
-		/*
-		Spalten s = new Spalten(0, 10, ginfo);
-		Spalten s1 = new Spalten(1, 10, ginfo);
-		Spalten s2 = new Spalten(2, 10, ginfo);
-=======
+
 		Spalten s = new Spalten(0);
 		Spalten s1 = new Spalten(1);
 		Spalten s2 = new Spalten(2);
->>>>>>> bd7a2734c44062f663536cca20b15623fa693e59
 
 		Knoten mitte = new Knoten(2,2,1.0, allNodes);
 		Knoten k1 = new Knoten(0,0,0.0, allNodes);
@@ -79,31 +73,21 @@ public class NPOsmose {
 		Knoten k3 = new Knoten(0,2,0.0, allNodes);
 		Knoten k4 = new Knoten(1,0,0.0, allNodes);
 		Knoten k5 = new Knoten(2,0,0.0, allNodes);
-<<<<<<< HEAD
-		s.set_knoten(k2);
-		s.set_knoten(k3);		
-		s.set_knoten(k1);
-		s1.set_knoten(k4);
-		s2.set_knoten(k5);
-		s2.set_knoten(mitte);*/
-//		m.addSpalte(s);
-//		m.addSpalte(s1);
-//		m.addSpalte(s2);
-
-//		m.initializeMatrix();
-=======
 		s.setKnoten(k2);
 		s.setKnoten(k3);		
 		s.setKnoten(k1);
 		s1.setKnoten(k4);
 		s2.setKnoten(k5);
 		s2.setKnoten(mitte);
+
+
+	
 		Matrix m = new Matrix(ginfo, 100); // initiale anzahl der iterationen hier gesetzt
 		m.addSpalte(s);
 		m.addSpalte(s1);
 		m.addSpalte(s2);
 		m.initializeMatrix();
->>>>>>> bd7a2734c44062f663536cca20b15623fa693e59
+/*
 		// Your implementation can now access ginfo to read out all important values
 		
 		/**
