@@ -85,11 +85,9 @@ public class NPOsmose {
 	//	System.out.println("rechts " + result_rechts) ;
 	//	System.out.println("links: " +result_links);
 		
-<<<<<<< HEAD
-		Spalten s = new Spalten(0, 100);
-=======
+
 	//	Spalten s = new Spalten(0, 10);
->>>>>>> d33bb5b22417819457d32bbc1c675fab09c10a07
+
 	//	System.out.print(s.toString());
 		
 	//	s.set_knoten(mitte);
@@ -98,14 +96,12 @@ public class NPOsmose {
 //		System.out.print(s.toString());
 //		Seq_Berechnung b = new Seq_Berechnung();
 		
-<<<<<<< HEAD
-		b.seqBerechnung(allNodes, ginfo);
-		System.out.println("allNodes:  "+allNodes);
+
 		
 		//TODO: nachvollziehen ob es auch wriklich das richtige tut!
-			b.seqBerechnung(allNodes, ginfo);
-			System.out.println("allNodes:  "+allNodes);
-=======
+		//	b.seqBerechnung(allNodes, ginfo);
+		//	System.out.println("allNodes:  "+allNodes);
+
 //		b.seqBerechnung(allNodes, ginfo);	
 //		b.seqBerechnung(allNodes, ginfo);	
 
@@ -115,10 +111,7 @@ public class NPOsmose {
 		//b.seqBerechnung(allNodes, ginfo);
 		//System.out.println("allNodes:  "+allNodes);
 		
-		
-		
-		
->>>>>>> d33bb5b22417819457d32bbc1c675fab09c10a07
+	
 		
 		
 		/**
