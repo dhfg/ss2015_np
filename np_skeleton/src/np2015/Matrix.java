@@ -33,12 +33,9 @@ public class Matrix extends Thread{
 //		while(true){
 			alleSpalten.add(initial);
 			startSpalten();
-<<<<<<< HEAD
+
 		//	organisiereaustauschAkkus();
-=======
-			organisiereAustauschAkkus();
->>>>>>> bd7a2734c44062f663536cca20b15623fa693e59
-//		}
+
 	}
 	
 	
@@ -105,13 +102,11 @@ public class Matrix extends Thread{
 	
 	// wo ist die run-funktion?
 	public void startSpalten(){
-<<<<<<< HEAD
-//		System.out.println("alle S " +alleSpalten);
-	//	List<Spalten> spaltenList = new ArrayList<Spalten>();
-=======
+
+
 		System.out.println("alle S " +alleSpalten);
 		//List<Spalten> spaltenList = new ArrayList<Spalten>(); // diese liste ist immer leer!?
->>>>>>> bd7a2734c44062f663536cca20b15623fa693e59
+
 		Iterator<Spalten> spaltenIt = alleSpalten.iterator();
 		while (spaltenIt.hasNext()) {
 			Thread threadSpalten = spaltenIt.next();
