@@ -1,6 +1,8 @@
 package np2015;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 
@@ -20,16 +22,59 @@ public class Matrix extends Thread{
 		this.height = ginfo.height;
 		this.width = ginfo.width;
 	}
+	/**
+	 * spalten starten,
+	 * solange es nicht konvergiert weitermachen
+	 * austauschen aufuren
+	 * */
 	
-	public void startSpalten(){
-		Thread threadSpalten = new Thread();
-		for(int i = 0; i < width; i++){
-			Spalten spalte = new Spalten(i, iterationen);
-
-		}
+	public void initializeMatrix(){
+//		while(true){
+			startSpalten();
+			austauschAkkus();
+//		}
 	}
 	
 	
+	public void austauschAkkus(){
+		//TODO akku vom link und rechts ändern	
+	}
+	
+	public void startSpalten(){
+		System.out.println("alle S " +alleSpalten);
+		List<Spalten> spaltenList = new ArrayList<Spalten>();
+		Iterator<Spalten> spaltenIt = alleSpalten.iterator();
+		while (spaltenIt.hasNext()) {
+			Thread threadSpalten = spaltenIt.next();
+			threadSpalten.start();
+		}	
+	}
+	
+	
+	public GraphInfo getGinfo() {
+		return ginfo;
+	}
+	public void setGinfo(GraphInfo ginfo) {
+		this.ginfo = ginfo;
+	}
+	public static int getHeight() {
+		return height;
+	}
+	public static void setHeight(int height) {
+		Matrix.height = height;
+	}
+	public static int getWidth() {
+		return width;
+	}
+	public static void setWidth(int width) {
+		Matrix.width = width;
+	}
+	public int getIterationen() {
+		return iterationen;
+	}
+	public void setIterationen(int iterationen) {
+		this.iterationen = iterationen;
+	}
 	public void addSpalte(Spalten p){
 		ArrayList<Spalten> alleSpalten = getAlleSpalten();
 		alleSpalten.add(p);
