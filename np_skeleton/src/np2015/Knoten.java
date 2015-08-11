@@ -9,7 +9,9 @@ public class Knoten{
 	private int y = 0;
 	private double outflow = 0;
 	private double inflow = 0;
-	
+	private double akkuR = 0;
+	private double akkuL = 0;
+
 	private double akku = 0;
 	private double current_value = 0;
 	
@@ -37,7 +39,7 @@ public class Knoten{
 	 * @param actual_node
 	 * @return Knoten der über dem aktuellen liegt
 	 */
-	public  Knoten get_neighbor_oben(List<Knoten> allNodes){
+	public Knoten get_neighbor_oben(List<Knoten> allNodes){
 		
 		// stimmt das so oder ist das umgekehrt?!
 		int pos_neighbor_o = this.getY()-1;
@@ -171,6 +173,27 @@ public class Knoten{
 	public void setInflow(double inflow) {
 		this.inflow = inflow;
 	}
+	
+
+	public double getAkkuR() {
+		return akkuR;
+	}
+
+
+	public void setAkkuR(double akkuR) {
+		this.akkuR = akkuR;
+	}
+
+
+	public double getAkkuL() {
+		return akkuL;
+	}
+
+
+	public void setAkkuL(double akkuL) {
+		this.akkuL = akkuL;
+	}
+	
 	
 	//TODO: == operator überschreiben
 	public boolean equals(Knoten other){
