@@ -30,7 +30,12 @@ public class Seq_Berechnung{
 					Knoten neighbor_unten= actual.get_neighbor_unten(allNodes);
 					Knoten neighbor_rechts = actual.get_neighbor_rechts(allNodes);
 					Knoten neighbor_links = actual.get_neighbor_links(allNodes);
-					System.out.println("oben "+neighbor_oben + " unten "+ neighbor_unten + " rechts " + neighbor_rechts + " links "+neighbor_links);
+					//System.out.println("oben "+neighbor_oben + " unten "+ neighbor_unten + " rechts " + neighbor_rechts + " links "+neighbor_links);
+//					System.out.println("Rate für oben " +ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
+//					System.out.println("Rate für unten " +ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom));
+//					System.out.println("Rate für rechts " +ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Right));
+//					System.out.println("Rate für links " +ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Left));
+			
 					
 					// top
 					if (neighbor_oben != null){
@@ -68,6 +73,8 @@ public class Seq_Berechnung{
 				Knoten actual = j.next();
 				actual.setCurrent_value(actual.getCurrent_value()+ actual.getAkku());
 				actual.setAkku(0.0);
+				
+				
 		}
 	}
 	
