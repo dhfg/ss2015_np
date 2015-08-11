@@ -29,11 +29,13 @@ public class Matrix extends Thread{
 	 * austauschen aufuren
 	 * */
 	
-	public void initializeMatrix(){
+	public void initializeMatrix(Spalten initial){
 //		while(true){
+			alleSpalten.add(initial);
 			startSpalten();
-			organisiereAustauschAkkus();
-//		}
+
+		//	organisiereaustauschAkkus();
+
 	}
 	
 	
@@ -105,8 +107,11 @@ public class Matrix extends Thread{
 	
 	// wo ist die run-funktion?
 	public void startSpalten(){
+
+
 		System.out.println("alle S " +alleSpalten);
 		//List<Spalten> spaltenList = new ArrayList<Spalten>(); // diese liste ist immer leer!?
+
 		Iterator<Spalten> spaltenIt = alleSpalten.iterator();
 		while (spaltenIt.hasNext()) {
 			Thread threadSpalten = spaltenIt.next();
