@@ -33,9 +33,9 @@ public class NPOsmose {
 			System.err.println("You must provide the serialized file as the first argument!");
 		}
 		GraphInfo ginfo = gson.fromJson(json, GraphInfo.class);
-		Spalten s = new Spalten(0, 10, ginfo);
-		Spalten s1 = new Spalten(1, 10, ginfo);
-		Spalten s2 = new Spalten(2, 10, ginfo);
+		Spalten s = new Spalten(0);
+		Spalten s1 = new Spalten(1);
+		Spalten s2 = new Spalten(2);
 
 		Knoten mitte = new Knoten(2,2,1.0, allNodes);
 		Knoten k1 = new Knoten(0,0,0.0, allNodes);
@@ -43,13 +43,13 @@ public class NPOsmose {
 		Knoten k3 = new Knoten(0,2,0.0, allNodes);
 		Knoten k4 = new Knoten(1,0,0.0, allNodes);
 		Knoten k5 = new Knoten(2,0,0.0, allNodes);
-		s.set_knoten(k2);
-		s.set_knoten(k3);		
-		s.set_knoten(k1);
-		s1.set_knoten(k4);
-		s2.set_knoten(k5);
-		s2.set_knoten(mitte);
-		Matrix m = new Matrix(ginfo);
+		s.setKnoten(k2);
+		s.setKnoten(k3);		
+		s.setKnoten(k1);
+		s1.setKnoten(k4);
+		s2.setKnoten(k5);
+		s2.setKnoten(mitte);
+		Matrix m = new Matrix(ginfo, 100); // initiale anzahl der iterationen hier gesetzt
 		m.addSpalte(s);
 		m.addSpalte(s1);
 		m.addSpalte(s2);

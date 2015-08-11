@@ -10,17 +10,18 @@ import java.util.List;
 public class Matrix extends Thread{
 	
 	private ArrayList<Spalten> alleSpalten = new ArrayList<Spalten>();
-	private GraphInfo ginfo = new GraphInfo(0, 0);
+	public static GraphInfo ginfo;
 	public static int height;
 	public static int width;
-	public int iterationen = 100;
+
+	public int iterationen;
 	
 	//Konstruktor
-	//TODO: macht es sinn darauf zu bestehen das der initiale Knoten mit dem Konstruktor eingeführt wird?
-	public Matrix(GraphInfo ginfo){	
-		this.ginfo = ginfo;
-		this.height = ginfo.height;
-		this.width = ginfo.width;
+	public Matrix(GraphInfo ginfo, int iterationen){	
+		Matrix.ginfo = ginfo;
+		Matrix.height = ginfo.height;
+		Matrix.width = ginfo.width;
+		this.iterationen = iterationen;
 	}
 	/**
 	 * spalten starten,
@@ -51,18 +52,14 @@ public class Matrix extends Thread{
 		}
 		
 	public void austauschAkkus(Knoten k){
+		
 		//links
 		Knoten n = k.get_neighbor_links(NPOsmose.allNodes);
-		// an Eva: hier kann es sein das es noch keinen nachbarknoten gibt, 
-		//dann muss er noch erzeugt werden und in die passende spalte eingetragen werden 
 		if (n == null){
-			create_new_node(n.getX()-1, n.getY());
-			
-			
+			create_new_node(k.getX()-1, k.getY());
 		}
 		
-		
-		
+		//TODO: info an mich: aufpassen das hier niemals versucht wird einen wert an einen knoten zugeben, der auserhalb des feldes liegt
 		double rate = k.getAkkuL();
 		n.setAkku(rate);
 		k.setOutflow(k.getOutflow()+rate);
@@ -78,7 +75,6 @@ public class Matrix extends Thread{
 		n.setInflow(n.getInflow()+rate);
 	}
 	
-	// x ist die spalte
 	// erzeugt wenn möglich neuen Knoten und trägt ihn passend überall ein
 	public Knoten create_new_node(int x, int y){
 			if ( x <= Matrix.height && x >= 0 && y <= Matrix.width && y >= 0){
@@ -86,32 +82,30 @@ public class Matrix extends Thread{
 					// wird geschaut, ob passende spalte existiert, wenn ja wird Wert eingetragen
 					for ( Spalten s : alleSpalten){
 							if (s.getSpalte() == x){
-								s.getKnoten().add(new_node);
+								s.setKnoten(new_node);
 								return new_node;
 							}
 					}
 					// wenn nicht wird spalte erzeugt und der wert dann eingetragen
-				//	Spalten new_column = new Spalten (x, ); //
-					
-					
-				
+					Spalten new_column = new Spalten (x); 
+					new_column.setKnoten(new_node);
+						return new_node;
 				}
 			return null;
 			}
-		
-	
-	
-	
 	
 		//TODO akku vom link und rechts ändern	
 	
+	
+	
+	// wo ist die run-funktion?
 	public void startSpalten(){
 		System.out.println("alle S " +alleSpalten);
-		List<Spalten> spaltenList = new ArrayList<Spalten>();
+		//List<Spalten> spaltenList = new ArrayList<Spalten>(); // diese liste ist immer leer!?
 		Iterator<Spalten> spaltenIt = alleSpalten.iterator();
 		while (spaltenIt.hasNext()) {
 			Thread threadSpalten = spaltenIt.next();
-			threadSpalten.start();
+			threadSpalten.start(); 
 		}	
 	}
 	
