@@ -3,10 +3,11 @@ package np2015;
 import java.util.ArrayList;
 
 // verwaltet alle Knoten einer Spalte
-public class Spalten{
+public class Spalten extends Thread{
 	
 	private int pos; 
 	private int iterationen;
+	private int spalte = 0;
 	public int getIterationen() {
 		return iterationen;
 	}
@@ -23,7 +24,7 @@ public class Spalten{
 	// TODO: wo muss ich diese allNOdes liste speichern?
 	//TODO: vielleicht besseren konstruktor ?? 
 	
-	private int spalte = 0;
+
 	
 	//Konstruktor
 	public Spalten(int spalte, int iter){
