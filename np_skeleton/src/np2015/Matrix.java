@@ -31,12 +31,12 @@ public class Matrix extends Thread{
 	public void initializeMatrix(){
 //		while(true){
 			startSpalten();
-			organisiereaustauschAkkus();
+			organisiereAustauschAkkus();
 //		}
 	}
 	
 	
-	public void organisiereaustauschAkkus(){
+	public void organisiereAustauschAkkus(){
 	/*	Iterator<Spalten> spaltenIt = alleSpalten.iterator();
 		int i = 0;
 		while (spaltenIt.hasNext()) {
