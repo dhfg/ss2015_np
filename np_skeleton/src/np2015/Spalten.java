@@ -59,7 +59,7 @@ public class Spalten extends Thread {
 		//while(true) {
 
 		//}		
-		System.out.println(knoten);
+	//	System.out.println(knoten);
 	}
 
 	/**
@@ -108,11 +108,11 @@ public class Spalten extends Thread {
 			neighNeigh = Neighbor.Left;
 			//rate für nachbar Links
 			rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh);
-			System.out.println("rateL "+ rate);
+			if (rate >0 )System.out.println("rateL "+ rate + " knoten " + actual);
 		}else{
 			//rate für nachbar rechts
 			rate = actual.getCurrent_value()*ginfo.getRateForTarget(actual.getX(), actual.getY(), neighNeigh);
-			System.out.println("rateR "+ rate);
+			if (rate >0 )System.out.println("rateR "+ rate + " knoten " + actual);
 		}
 		return rate;
 	}

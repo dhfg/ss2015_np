@@ -28,10 +28,11 @@ public class Matrix extends Thread{
 	 * austauschen aufuren
 	 * */
 	
-	public void initializeMatrix(){
+	public void initializeMatrix(Spalten initial){
 //		while(true){
+			alleSpalten.add(initial);
 			startSpalten();
-			organisiereaustauschAkkus();
+		//	organisiereaustauschAkkus();
 //		}
 	}
 	
@@ -68,8 +69,8 @@ public class Matrix extends Thread{
 		//TODO akku vom link und rechts ändern	
 	
 	public void startSpalten(){
-		System.out.println("alle S " +alleSpalten);
-		List<Spalten> spaltenList = new ArrayList<Spalten>();
+//		System.out.println("alle S " +alleSpalten);
+	//	List<Spalten> spaltenList = new ArrayList<Spalten>();
 		Iterator<Spalten> spaltenIt = alleSpalten.iterator();
 		while (spaltenIt.hasNext()) {
 			Thread threadSpalten = spaltenIt.next();
