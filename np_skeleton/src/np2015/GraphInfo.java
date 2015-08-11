@@ -84,20 +84,20 @@ public class GraphInfo implements GuardedCommand {
 	 * By just providing the x and y coordinate + the desired neighbor
 	 * you'll get the correct rate
 	 */
-	public synchronized double getRateForTarget(int x, int y, Neighbor where) {
+	public synchronized double getRateForTarget(int x, int y, Neighbor n) {
 		assert(guards.size() > 0);
 		assert(allGuardsAdded);
-		if (where == Neighbor.Left && x == 0)
+		if (n == Neighbor.Left && x == 0)
 			return 0;
-		else if (where == Neighbor.Right && x == width-1)
+		else if (n == Neighbor.Right && x == width-1)
 			return 0;
-		else if (where == Neighbor.Top && y == 0)
+		else if (n == Neighbor.Top && y == 0)
 			return 0;
-		else if (where == Neighbor.Bottom && y == height-1)
+		else if (n == Neighbor.Bottom && y == height-1)
 			return 0;
 		for (int i = 0; i<guards.size(); ++i) {
 			int[] guard = guards.get(i);
-			if (guard[0] == where.ordinal() &&
+			if (guard[0] == n.ordinal() &&
 				guard[1] <= x &&
 				x < guard[2] &&
 				guard[3] <= y &&
