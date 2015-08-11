@@ -9,13 +9,7 @@ public class Spalten extends Thread{
 	private int pos; 
 	private int iterationen;
 	private int spalte = 0;
-	public int getIterationen() {
-		return iterationen;
-	}
-
-	public void setIterationen(int iterationen) {
-		this.iterationen = iterationen;
-	}
+	
 	private ArrayList<Knoten> knoten = new ArrayList<Knoten>();
 	// für parallele lösung
 	private ArrayList<Double> akku_R = new ArrayList<Double>();
@@ -69,6 +63,15 @@ public class Spalten extends Thread{
 		return akku_L.get(pos);
 		
 	}
+	
+	public int getIterationen() {
+		return iterationen;
+	}
+
+	public void setIterationen(int iterationen) {
+		this.iterationen = iterationen;
+	}
+	
 	public String toString(){
 		return ("( number: "+ spalte + " knoten: " + knoten +" akku_R: "+ akku_R + " akku_L: " + akku_L + ") \n");
 	}
