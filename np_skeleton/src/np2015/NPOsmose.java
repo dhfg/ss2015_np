@@ -8,7 +8,12 @@ import java.nio.file.Paths;
 
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.gson.Gson;
 
@@ -33,6 +38,31 @@ public class NPOsmose {
 			System.err.println("You must provide the serialized file as the first argument!");
 		}
 		GraphInfo ginfo = gson.fromJson(json, GraphInfo.class);
+		
+		Matrix m = new Matrix(ginfo);
+		Set<Entry<Integer, HashMap<Integer, Double>>> e = ginfo.column2row2initialValue.entrySet();
+		Iterator<Entry<Integer, HashMap<Integer, Double>>> it1 = e.iterator();
+			Entry<Integer, HashMap<Integer, Double>> entry = it1.next();
+			System.out.println(entry);
+			System.out.println("key " +entry.getKey());
+			System.out.println("value " +entry.getValue());
+			int x = entry.getKey();
+			
+		HashMap<Integer, HashMap<Integer, Double>> hashMap = ginfo.column2row2initialValue;
+		Set<Integer> set2 = entry.getValue().keySet();
+		Iterator<Integer> it2 = set2.iterator();
+			int y = it2.next();
+			double d = hashMap.get(x).get(y);
+			System.out.println("x "+ x + " y "+ y + " double "+ d);
+			
+//		ginfo.addInitialEntry(x, y, d);
+		Spalten initial = new Spalten(x, 100, ginfo);
+		Knoten k = new Knoten(x, y, d, allNodes);
+		allNodes.add(k);
+		initial.set_knoten(k);
+		m.initializeMatrix(initial);
+		
+		/*
 		Spalten s = new Spalten(0, 10, ginfo);
 		Spalten s1 = new Spalten(1, 10, ginfo);
 		Spalten s2 = new Spalten(2, 10, ginfo);
@@ -48,12 +78,12 @@ public class NPOsmose {
 		s.set_knoten(k1);
 		s1.set_knoten(k4);
 		s2.set_knoten(k5);
-		s2.set_knoten(mitte);
-		Matrix m = new Matrix(ginfo);
-		m.addSpalte(s);
-		m.addSpalte(s1);
-		m.addSpalte(s2);
-		m.initializeMatrix();
+		s2.set_knoten(mitte);*/
+//		m.addSpalte(s);
+//		m.addSpalte(s1);
+//		m.addSpalte(s2);
+
+//		m.initializeMatrix();
 		// Your implementation can now access ginfo to read out all important values
 		
 		/**
