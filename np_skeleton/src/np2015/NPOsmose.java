@@ -49,7 +49,7 @@ public class NPOsmose {
 	//	Knoten links = new Knoten(0,1,0.0, allNodes);
 	//	Knoten rechts = new Knoten(2,1,0.0, allNodes);
 		
-		System.out.println(mitte.toString());
+		//System.out.println(mitte.toString());
 	//	System.out.println(oben.toString());
 	//	System.out.println(unten.toString());
 	//	System.out.println(links.toString());
@@ -67,16 +67,16 @@ public class NPOsmose {
 	//	System.out.println("links: " +result_links);
 		
 		Spalten s = new Spalten(0);
-		System.out.print(s.toString());
+	//	System.out.print(s.toString());
 		
 		s.set_knoten(mitte);
 		s.set_akku_L(1.0);
 		s.set_akku_R(1.0);
-		System.out.print(s.toString());
+//		System.out.print(s.toString());
 		Seq_Berechnung b = new Seq_Berechnung();
 		
 		b.seqBerechnung(allNodes, ginfo);
-		System.out.println("allNodes:  "+allNodes);
+//		System.out.println("allNodes:  "+allNodes);
 		
 		//TODO: nachvollziehen ob es auch wriklich das richtige tut!
 		//	b.seqBerechnung(allNodes, ginfo);
