@@ -31,14 +31,41 @@ public class Matrix extends Thread{
 	public void initializeMatrix(){
 //		while(true){
 			startSpalten();
-			austauschAkkus();
+			organisiereaustauschAkkus();
 //		}
 	}
 	
 	
-	public void austauschAkkus(){
-		//TODO akku vom link und rechts ändern	
+	public void organisiereaustauschAkkus(){
+	/*	Iterator<Spalten> spaltenIt = alleSpalten.iterator();
+		int i = 0;
+		while (spaltenIt.hasNext()) {
+			Spalten currentSpalte = spaltenIt.next();
+
+			*/
+			Iterator<Knoten> knotenIt = NPOsmose.allNodes.iterator();
+			while(knotenIt.hasNext()){
+				Knoten currentKnoten = knotenIt.next();				
+				austauschAkkus(currentKnoten);
+			}
+		}
+		
+	public void austauschAkkus(Knoten k){
+		//links
+		Knoten n = k.get_neighbor_links(NPOsmose.allNodes);
+		double rate = k.getAkkuL();
+		n.setAkku(rate);
+		k.setOutflow(k.getOutflow()+rate);
+		n.setInflow(n.getInflow()+rate);
+		//rechts
+		n = k.get_neighbor_rechts(NPOsmose.allNodes);
+		rate = k.getAkkuL();
+		n.setAkku(rate);
+		k.setOutflow(k.getOutflow()+rate);
+		n.setInflow(n.getInflow()+rate);
 	}
+	
+		//TODO akku vom link und rechts ändern	
 	
 	public void startSpalten(){
 		System.out.println("alle S " +alleSpalten);
