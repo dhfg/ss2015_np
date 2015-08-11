@@ -7,6 +7,14 @@ import java.util.List;
 public class Spalten{
 	
 	private int pos; 
+	private int iterationen;
+	public int getIterationen() {
+		return iterationen;
+	}
+
+	public void setIterationen(int iterationen) {
+		this.iterationen = iterationen;
+	}
 	private ArrayList<Knoten> knoten = new ArrayList<Knoten>();
 	// für parallele lösung
 	private ArrayList<Double> akku_R = new ArrayList<Double>();
@@ -19,8 +27,9 @@ public class Spalten{
 	private int spalte = 0;
 	
 	//Konstruktor
-	public Spalten(int spalte){
+	public Spalten(int spalte, int iter){
 		this.spalte = spalte;
+		this.iterationen = iter;
 	}
 	
 	// TODO: rausfinden ob set funktioniert auch wenn die liste leer ist 

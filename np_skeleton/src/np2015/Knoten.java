@@ -7,6 +7,9 @@ public class Knoten{
 	
 	private int x = 0;
 	private int y = 0;
+	private double outflow = 0;
+	private double inflow = 0;
+	
 	private double akku = 0;
 	private double current_value = 0;
 	
@@ -24,7 +27,7 @@ public class Knoten{
 		this.current_value = current_value;
 		this.akku = 0;
 		allNodes.add(this);
-		System.out.println(allNodes);
+	//	System.out.println(allNodes);
 	}
 	
 	
@@ -161,6 +164,25 @@ public class Knoten{
 
 	public void setAkku(double d) {
 		this.akku = d;
+	}
+	
+	public double getOutflow() {
+		return outflow;
+	}
+
+
+	public void setOutflow(double outflow) {
+		this.outflow = outflow;
+	}
+
+
+	public double getInflow() {
+		return inflow;
+	}
+
+
+	public void setInflow(double inflow) {
+		this.inflow = inflow;
 	}
 	
 	//TODO: == operator überschreiben
