@@ -40,26 +40,31 @@ public class NPOsmose {
 		/**
 		 * test für Knoten
 		 */
+		
+		// muss auskommentiert sein für test der seq_berechnung!
+		
 		Knoten mitte = new Knoten(1,1,1.0, allNodes);
-		Knoten oben = new Knoten(1,0,1.0, allNodes);
-		Knoten unten = new Knoten(1,2,1.0, allNodes);
-		Knoten links = new Knoten(0,1,1.0, allNodes);
-		Knoten rechts = new Knoten(2,1,1.0, allNodes);
+	//	Knoten oben = new Knoten(1,0,0.0, allNodes);
+	//	Knoten unten = new Knoten(1,2,0.0, allNodes);
+	//	Knoten links = new Knoten(0,1,0.0, allNodes);
+	//	Knoten rechts = new Knoten(2,1,0.0, allNodes);
 		
 		System.out.println(mitte.toString());
-		System.out.println(oben.toString());
-		System.out.println(unten.toString());
-		System.out.println(links.toString());
-		System.out.println(rechts.toString());	
+	//	System.out.println(oben.toString());
+	//	System.out.println(unten.toString());
+	//	System.out.println(links.toString());
+	//	System.out.println(rechts.toString());	
 		
-		Knoten result_oben = mitte.get_neighbor_oben(allNodes);
-		Knoten result_unten =  mitte.get_neighbor_unten(allNodes);
-		Knoten result_rechts = mitte.get_neighbor_rechts(allNodes);
-		Knoten result_links =  mitte.get_neighbor_links(allNodes);
-		System.out.println("oben " + result_oben) ;
-		System.out.println("unten: " +result_unten);
-		System.out.println("rechts " + result_rechts) ;
-		System.out.println("links: " +result_links);
+		// muss auskommentiert sein für test der seq_berechnung!!
+		
+	//	Knoten result_oben = mitte.get_neighbor_oben(allNodes);
+	//	Knoten result_unten =  mitte.get_neighbor_unten(allNodes);
+	//	Knoten result_rechts = mitte.get_neighbor_rechts(allNodes);
+	//	Knoten result_links =  mitte.get_neighbor_links(allNodes);
+	//	System.out.println("oben " + result_oben) ;
+	//	System.out.println("unten: " +result_unten);
+	//	System.out.println("rechts " + result_rechts) ;
+	//	System.out.println("links: " +result_links);
 		
 		Spalten s = new Spalten(0);
 		System.out.print(s.toString());
@@ -68,8 +73,20 @@ public class NPOsmose {
 		s.set_akku_L(1.0);
 		s.set_akku_R(1.0);
 		System.out.print(s.toString());
+		Seq_Berechnung b = new Seq_Berechnung();
 		
-		//TODO: Seq_Berechnung testen
+		b.seqBerechnung(allNodes, ginfo);
+		System.out.println("allNodes:  "+allNodes);
+		
+		//TODO: nachvollziehen ob es auch wriklich das richtige tut!
+		//	b.seqBerechnung(allNodes, ginfo);
+		//System.out.println("allNodes:  "+allNodes);
+		
+		
+		
+		
+		
+		
 		/**
 		 * original ende der datei
 		 */

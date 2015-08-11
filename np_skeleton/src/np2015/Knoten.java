@@ -38,7 +38,9 @@ public class Knoten{
 		
 		// stimmt das so oder ist das umgekehrt?!
 		int pos_neighbor_o = this.getY()-1;
-		int pos_neighbor_u = this.getY()+1;
+		if (pos_neighbor_o < 0){
+			return null;
+		}
 		
 		int spalte = this.getX();
 		for (Knoten k : allNodes){
@@ -46,7 +48,10 @@ public class Knoten{
 				return k;
 			}
 		}
-			return null;
+		// es gibt den nachbarknoten noch nicht, deswegen wird er mit dem current_value null angelegt
+			Knoten new_node =new  Knoten(spalte, pos_neighbor_o, 0.0, allNodes);
+			return new_node;
+			
 		}
 		
 	
@@ -57,8 +62,7 @@ public class Knoten{
 	 */
 	public  Knoten get_neighbor_unten(List<Knoten> allNodes ){
 		
-		// stimmt das so oder ist das umgekehrt?!
-		int pos_neighbor_o = this.getY()-1;
+		// stimmt das so oder ist das umgekehrt?!;
 		int pos_neighbor_u = this.getY()+1;
 		
 		int spalte = this.getX();
@@ -67,7 +71,8 @@ public class Knoten{
 				return k;
 			}
 		}
-		return null;
+		Knoten new_node =new  Knoten(spalte, pos_neighbor_u, 0.0, allNodes);
+		return new_node;
 		}
 	
 	
@@ -80,14 +85,14 @@ public class Knoten{
 	
 		int zeile = this.getY();
 		int pos_neighbor_r = this.getX()+1;
-		int pos_neighbor_l = this.getX()-1;
 		
 		for ( Knoten k : allNodes ){
 			if (k.getY() == zeile && k.getX() == pos_neighbor_r ){
 				return k;
 			}
 		}
-		return null;
+		Knoten new_node =new  Knoten(pos_neighbor_r,zeile, 0.0, allNodes);
+		return new_node;
 		}
 	
 	/**
@@ -98,15 +103,18 @@ public class Knoten{
 	public Knoten get_neighbor_links(List<Knoten> allNodes ){
 		
 		int zeile = this.getY();
-		int pos_neighbor_r = this.getX()+1;
 		int pos_neighbor_l = this.getX()-1;
+		if (pos_neighbor_l < 0){
+			return null;
+		}
 	
 		for ( Knoten k : allNodes){
 			if (k.getY() == zeile && k.getX() == pos_neighbor_l){
 				return k;
 			}
 		}
-		return null;
+		Knoten new_node =new  Knoten(pos_neighbor_l,zeile, 0.0, allNodes);
+		return new_node;
 	}
 	
 	

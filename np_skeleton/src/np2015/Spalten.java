@@ -7,6 +7,7 @@ public class Spalten{
 	
 	private int pos; 
 	private ArrayList<Knoten> knoten = new ArrayList<Knoten>();
+	// für parallele lösung
 	private ArrayList<Double> akku_R = new ArrayList<Double>();
 	private ArrayList<Double> akku_L = new ArrayList<Double>();
 	//TODO: brauchen wir eine vierte arraylist? wenn ja warum ? kann man das nicht in der hauptstuktur verwalten  

@@ -1,5 +1,6 @@
 package np2015;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,7 +16,13 @@ public class Seq_Berechnung {
 	 */
 	public void seqBerechnung(List<Knoten> allNodes, GraphInfo ginfo){
 		
-		Iterator<Knoten> i = allNodes.iterator();
+		//TODO: in schön!! das Objelt so kopieren das es keine refernez auf das alte erhält!!
+		List<Knoten> copyList = new ArrayList<Knoten>();
+		Iterator<Knoten> l = allNodes.iterator();
+		while (l.hasNext()) {
+			copyList.add(l.next());
+		}	
+		Iterator<Knoten> i = copyList.iterator();
 		while (i.hasNext()) {
 					Knoten actual = i.next();
 					Knoten neighbor_oben = actual.get_neighbor_oben(allNodes);
@@ -24,11 +31,13 @@ public class Seq_Berechnung {
 					Knoten neighbor_links = actual.get_neighbor_links(allNodes);
 					
 					// top
+					if (neighbor_oben != null){
 					neighbor_oben.setAkku(neighbor_oben.getAkku() + actual.getCurrent_value()*
 							ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
 					
 					actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
 							ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Top));
+					}
 					// down
 					neighbor_unten.setAkku(neighbor_unten.getAkku() + actual.getCurrent_value()*
 							ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Bottom));
@@ -40,10 +49,12 @@ public class Seq_Berechnung {
 					actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
 							ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Right));
 					//left
+					if (neighbor_links != null){
 					neighbor_links.setAkku(neighbor_links.getAkku() + actual.getCurrent_value()*
 							ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Left));
 					actual.setAkku(actual.getAkku()-actual.getCurrent_value()*
 							ginfo.getRateForTarget(actual.getX(), actual.getY(), Neighbor.Left));
+					}
 			}
 		
 		Iterator<Knoten> j = allNodes.iterator();
