@@ -53,17 +53,55 @@ public class Matrix extends Thread{
 	public void austauschAkkus(Knoten k){
 		//links
 		Knoten n = k.get_neighbor_links(NPOsmose.allNodes);
+		// an Eva: hier kann es sein das es noch keinen nachbarknoten gibt, 
+		//dann muss er noch erzeugt werden und in die passende spalte eingetragen werden 
+		if (n == null){
+			create_new_node(n.getX()-1, n.getY());
+			
+			
+		}
+		
+		
+		
 		double rate = k.getAkkuL();
 		n.setAkku(rate);
 		k.setOutflow(k.getOutflow()+rate);
 		n.setInflow(n.getInflow()+rate);
 		//rechts
 		n = k.get_neighbor_rechts(NPOsmose.allNodes);
+		if (n == null){
+			create_new_node(n.getX()+1, n.getY());
+		}
 		rate = k.getAkkuL();
 		n.setAkku(rate);
 		k.setOutflow(k.getOutflow()+rate);
 		n.setInflow(n.getInflow()+rate);
 	}
+	
+	// x ist die spalte
+	// erzeugt wenn möglich neuen Knoten und trägt ihn passend überall ein
+	public Knoten create_new_node(int x, int y){
+			if ( x <= Matrix.height && x >= 0 && y <= Matrix.width && y >= 0){
+					Knoten new_node = new Knoten(x, y, 0.0, NPOsmose.allNodes);
+					// wird geschaut, ob passende spalte existiert, wenn ja wird Wert eingetragen
+					for ( Spalten s : alleSpalten){
+							if (s.getSpalte() == x){
+								s.getKnoten().add(new_node);
+								return new_node;
+							}
+					}
+					// wenn nicht wird spalte erzeugt und der wert dann eingetragen
+				//	Spalten new_column = new Spalten (x, ); //
+					
+					
+				
+				}
+			return null;
+			}
+		
+	
+	
+	
 	
 		//TODO akku vom link und rechts ändern	
 	
